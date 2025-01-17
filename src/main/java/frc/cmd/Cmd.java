@@ -3,6 +3,8 @@ package frc.cmd;
 import java.util.Set;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.cmd.compat.CmdAdapter;
+import frc.cmd.compat.CmdProxy;
 
 /** new verson of {@link Command} */
 public abstract class Cmd {
@@ -32,6 +34,13 @@ public abstract class Cmd {
 
     public void cancel() {
         this.scheduler.cancel(this);
+    }
+
+    public Command getWPILibCommand() {
+        return new CmdAdapter(
+            this,
+            new CmdProxy(scheduler, phase, priority, (SubSystem0[])reqs.toArray())
+        );
     }
 
     /** same as {@link Command#initialize()} */
