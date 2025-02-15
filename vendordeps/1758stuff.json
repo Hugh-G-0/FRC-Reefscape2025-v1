@@ -1,0 +1,18 @@
+{
+    "fileName": "1758stuff.json",
+    "name": "1758 stuff",
+    "version": "oneversion",
+    "uuid": "7b8ff0c2-4234-4a60-975d-f4a3408bd08a",
+    "frcYear": "2025",
+    "mavenUrls": [],
+    "jsonUrl": "",
+    "javaDependencies": [
+        {
+            "groupId": "com.gmail.frcteam1758.stuff",
+            "artifactId": "stuff",
+            "version": "oneversion"
+        }
+    ],
+    "jniDependencies": [],
+    "cppDependencies": []
+}

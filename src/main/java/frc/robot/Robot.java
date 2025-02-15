@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.cmd.CmdScheduler;
-import frc.config.DynamicConfiguration;
+import frc.config.Cfg;
 import frc.robot.algae.AlgaeSubSystem;
 import frc.robot.climb.ClimbSubSystem;
 import frc.robot.coral.CoralSubSystem;
@@ -36,12 +36,12 @@ public class Robot extends TimedRobot {
     private final ElevtSubSystem elevtSS = new ElevtSubSystem(scheduler);
 
     public Robot() {
-        DynamicConfiguration.load();
+        Cfg.load();
     }
 
     @Override
     public void robotPeriodic() {
-        scheduler.run();
+        //scheduler.run();
     }
 
     @Override
@@ -54,11 +54,13 @@ public class Robot extends TimedRobot {
     public void teleopInit() {}
 
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        this.driveSS.chassis.performTeleop();
+    }
 
     @Override
     public void disabledInit() {
-        DynamicConfiguration.refresh();
+        Cfg.refresh();
     }
 
     @Override

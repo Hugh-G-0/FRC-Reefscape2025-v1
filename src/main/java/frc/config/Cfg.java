@@ -2,6 +2,7 @@ package frc.config;
 
 import java.io.File;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 /**
@@ -11,11 +12,11 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
  * match those on {@link Shuffleboard}
  * and a JSON file on the roboRIO
  */
-public class DynamicConfiguration {
+public class Cfg {
     
-    public static DynamicConfiguration k = new DynamicConfiguration();
+    public static Cfg k = new Cfg();
 
-    private DynamicConfiguration() {}
+    private Cfg() {}
 
     public static void load(File f) {
         ConfigurationBase.load(f);
@@ -27,7 +28,7 @@ public class DynamicConfiguration {
 
     public static void refresh() {
         ConfigurationBase.refresh();
-        k = new DynamicConfiguration();
+        k = new Cfg();
     }
 
     public static final double NOT_YET_DEFINED = Double.NaN;
@@ -36,7 +37,7 @@ public class DynamicConfiguration {
 
     public final double // ...
 
-    WHEEL_BASE_SIZE = ConfigurationBase.getOr("static.wheelBaseSize", NOT_YET_DEFINED);
+    WHEEL_BASE_SIZE = ConfigurationBase.getOr("static.wheelBaseSize", Units.inchesToMeters(12.5));
 
     // dynamic PIDF+ constants (pidf.*)
     public final double // ...
