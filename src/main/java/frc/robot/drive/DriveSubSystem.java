@@ -1,27 +1,31 @@
 package frc.robot.drive;
 
-import frc.cmd.CmdScheduler;
-import frc.cmd.SubSystem0;
 import frc.config.Cfg;
 
-import com.gmail.frcteam1758.lib.enums.SwerveDriveMode;
 import com.gmail.frcteam1758.lib.swervedrive.MaxSwerveConfig;
 import com.gmail.frcteam1758.lib.swervedrive.MaxSwerveConstants;
 import com.gmail.frcteam1758.lib.swervedrive.MaxSwerveModule;
 import com.gmail.frcteam1758.lib.swervedrive.SwerveChassis;
-import com.gmail.frcteam1758.lib.swervedrive.control.SwerveDriveControls2023;
 import com.gmail.frcteam1758.lib.swervedrive.control.SwerveDriveInput;
-import frc.robot.multi.Communal;
+
+import frc.robot.multi.GlobalResources;
+import frc.robot.multi.Controls;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
- * A {@link SubSystem0} that manages the drivetrain
+ * A {@link SubSystem} that manages the drivetrain
  */
-public class DriveSubSystem extends SubSystem0 {
-    
-    public DriveSubSystem(CmdScheduler scheduler) {
-        super(scheduler);
+public class DriveSubSystem extends SubsystemBase {
+
+    public static final DriveSubSystem INSTANCE = new DriveSubSystem();
+
+    private DriveSubSystem() {
+
+        this.setDefaultCommand(
+            this.run(this.chassis::performTeleop)
+        );
     }
 
     private MaxSwerveModule[] modules = {
@@ -47,21 +51,11 @@ public class DriveSubSystem extends SubSystem0 {
         )
     };
 
-    // TODO: proper drive controls
-    private SwerveDriveInput ctrl_TEMP = new SwerveDriveControls2023(
-        0, 1,
-        () -> Rotation2d.fromDegrees(-Communal.GYRO.getAngle()),
-        SwerveDriveMode.FIELD_ORIENTED,
-        MaxSwerveConstants.DriveConstants.kMaxSpeedMetersPerSecond,
-        MaxSwerveConstants.DriveConstants.kMaxAngularSpeed
-    );
-
-    // TODO: make chassis private when CMD stuff is done
     public SwerveChassis chassis = new SwerveChassis(
-        ctrl_TEMP,
+        Controls.swerveControls,
         SwerveDriveInput.NO_INPUT,
         modules,
         MaxSwerveConstants.DriveConstants.kMaxSpeedMetersPerSecond,
-        () -> Rotation2d.fromDegrees(-Communal.GYRO.getAngle())
+        () -> Rotation2d.fromDegrees(-GlobalResources.GYRO.getAngle())
     );
 }

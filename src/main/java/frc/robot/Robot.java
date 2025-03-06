@@ -4,14 +4,14 @@
 
 package frc.robot;
 
+import au.grapplerobotics.CanBridge;
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.cmd.CmdScheduler;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.config.Cfg;
-import frc.robot.algae.AlgaeSubSystem;
-import frc.robot.climb.ClimbSubSystem;
 import frc.robot.coral.CoralSubSystem;
 import frc.robot.drive.DriveSubSystem;
 import frc.robot.elevt.ElevtSubSystem;
+import frc.robot.multi.Controls;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -20,28 +20,20 @@ import frc.robot.elevt.ElevtSubSystem;
  */
 public class Robot extends TimedRobot {
 
-    private final CmdScheduler scheduler = new CmdScheduler(
-        CmdPhase.values(),
-        CmdPriority.values()
-    );
-
-    private final AlgaeSubSystem algaeSS = new AlgaeSubSystem(scheduler);
-
-    private final ClimbSubSystem climbSS = new ClimbSubSystem(scheduler);
-
-    private final CoralSubSystem coralSS = new CoralSubSystem(scheduler);
-
-    private final DriveSubSystem driveSS = new DriveSubSystem(scheduler);
-
-    private final ElevtSubSystem elevtSS = new ElevtSubSystem(scheduler);
-
     public Robot() {
         Cfg.load();
+
+        CanBridge.runTCP();
+
+        DriveSubSystem.INSTANCE.register();
+        CoralSubSystem.INSTANCE.register();
+        ElevtSubSystem.INSTANCE.register();
     }
 
     @Override
     public void robotPeriodic() {
-        //scheduler.run();
+        Controls.scheduleCommands();
+        CommandScheduler.getInstance().run();
     }
 
     @Override
@@ -54,13 +46,11 @@ public class Robot extends TimedRobot {
     public void teleopInit() {}
 
     @Override
-    public void teleopPeriodic() {
-        this.driveSS.chassis.performTeleop();
-    }
+    public void teleopPeriodic() {}
 
     @Override
     public void disabledInit() {
-        Cfg.refresh();
+        CommandScheduler.getInstance().cancelAll();
     }
 
     @Override
@@ -77,8 +67,4 @@ public class Robot extends TimedRobot {
 
     @Override
     public void simulationPeriodic() {}
-
-    public static enum CmdPhase {}
-
-    public static enum CmdPriority {}
 }
