@@ -34,7 +34,7 @@ public class Cfg {
     public static final double NOT_YET_DEFINED = 0;
 
     /*
-     * ConfigurationBase.getOr(String key, double default_) attempts to findand return a value in
+     * ConfigurationBase.getOr(String key, double default_) attempts to find and return a value in
      * the configuration JSON file that matches the key provided. If there is an error, the "default_"
      * parameter is returned instead. Value are syncronized with ShuffleBoard and the config file is updated
      * every time the robot is disbaled from the FRC Driver Station
