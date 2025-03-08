@@ -4,12 +4,10 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.config.Cfg;
-import frc.robot.Robot;
 import frc.robot.multi.GlobalResources;
 
 /**
@@ -25,10 +23,6 @@ public class ElevtSubSystem extends SubsystemBase {
 
     private ElevatorFeedforward unloadedFF, loadedFF, ff;
 
-    private TrapezoidProfile profile;
-
-    private double prevVel = 0;
-
     public ElevtSubSystem() {
         
         this.liftMtr = new SparkMax(21, MotorType.kBrushless);
@@ -38,10 +32,6 @@ public class ElevtSubSystem extends SubsystemBase {
         this.cfgFF();
 
         this.ff = this.loadedFF;
-
-        profile = new TrapezoidProfile(
-            new TrapezoidProfile.Constraints(Cfg.k.ELEV_MAXV, Cfg.k.ELEV_ACCL)
-        );
 
         this.setDefaultCommand(this.run(this::hold));
 

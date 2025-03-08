@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "inner cage to L1 far"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "dump"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "L1 far to far pickup"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
