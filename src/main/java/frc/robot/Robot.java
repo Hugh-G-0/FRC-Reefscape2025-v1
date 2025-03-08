@@ -12,6 +12,7 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import au.grapplerobotics.CanBridge;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -40,6 +41,8 @@ public class Robot extends TimedRobot {
         Cfg.load();
 
         CanBridge.runTCP();
+
+        CameraServer.startAutomaticCapture(1);
 
         DriveSubSystem.INSTANCE.register();
         CoralSubSystem.INSTANCE.register();
