@@ -8,7 +8,7 @@ import com.gmail.frcteam1758.lib.swervedrive.MaxSwerveModule;
 import com.gmail.frcteam1758.lib.swervedrive.SwerveChassis;
 import com.gmail.frcteam1758.lib.swervedrive.control.SwerveDriveInput;
 import frc.robot.multi.GlobalResources;
-import frc.robot.multi.Controls;
+import frc.robot.multi.XBMainControls;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -51,7 +51,7 @@ public class DriveSubSystem extends SubsystemBase {
     };
 
     public SwerveChassis chassis = new SwerveChassis(
-        Controls.swerveControls,
+        XBMainControls.swerveControls,
         SwerveDriveInput.NO_INPUT,
         modules,
         MaxSwerveConstants.DriveConstants.kMaxSpeedMetersPerSecond,
