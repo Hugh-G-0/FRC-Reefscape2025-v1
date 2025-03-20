@@ -22,11 +22,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.config.Cfg;
-import frc.robot.coral.CoralSubSystem;
+import frc.robot.coral.DumpSubSystem;
 import frc.robot.drive.DriveSubSystem;
 import frc.robot.elevt.ElevCommand;
 import frc.robot.elevt.ElevtSubSystem;
-import frc.robot.multi.Controls;
+import frc.robot.multi.XBMainControls;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -37,16 +37,24 @@ public class Robot extends TimedRobot {
 
     private SendableChooser<Command> autoChooser;
 
-    public Robot() {
-        Cfg.load();
+    public Robot() {}
 
+    @Override
+    public void robotInit() {
         CanBridge.runTCP();
 
-        CameraServer.startAutomaticCapture(1);
+        CameraServer.startAutomaticCapture();
 
         DriveSubSystem.INSTANCE.register();
-        CoralSubSystem.INSTANCE.register();
+        DumpSubSystem.INSTANCE.register();
         ElevtSubSystem.INSTANCE.register();
+
+        NamedCommands.registerCommand("elev-L4", new ElevCommand(Cfg.k.TARGET_L4));
+        NamedCommands.registerCommand("elev-L3", new ElevCommand(Cfg.k.TARGET_L3));
+        NamedCommands.registerCommand("elev-L2", new ElevCommand(Cfg.k.TARGET_L2));
+        NamedCommands.registerCommand("elev-CH", new ElevCommand(Cfg.k.TARGET_CH));
+
+        NamedCommands.registerCommand("dump", new DumpSubSystem.DumpCommand());
 
         try {
             AutoBuilder.configure(
@@ -70,18 +78,11 @@ public class Robot extends TimedRobot {
             SmartDashboard.putData("autos", autoChooser = new SendableChooser<Command>());
         }
         autoChooser.setDefaultOption("NONE", new InstantCommand());
-
-        NamedCommands.registerCommand("elev-L4", new ElevCommand(Cfg.k.TARGET_L4));
-        NamedCommands.registerCommand("elev-L3", new ElevCommand(Cfg.k.TARGET_L3));
-        NamedCommands.registerCommand("elev-L2", new ElevCommand(Cfg.k.TARGET_L2));
-        NamedCommands.registerCommand("elev-CH", new ElevCommand(Cfg.k.TARGET_CH));
-
-        NamedCommands.registerCommand("dump", new CoralSubSystem.DumpCommand());
     }
 
     @Override
     public void robotPeriodic() {
-        Controls.scheduleCommands();
+        XBMainControls.scheduleCommands();
         CommandScheduler.getInstance().run();
     }
 

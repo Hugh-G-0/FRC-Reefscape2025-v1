@@ -53,6 +53,7 @@ class ConfigurationBase {
 
         catch (Exception e) {
             System.out.println("JSON configuration error enountereed. Falling back to hard coded values.");
+            e.printStackTrace();
         }
     }
 
@@ -99,7 +100,7 @@ class ConfigurationBase {
     }
 
     private static final ShuffleboardTab tabOf(String key) {
-        return Shuffleboard.getTab( key.substring(0, key.indexOf(".")));
+        return Shuffleboard.getTab(key.substring(0, key.indexOf(".")));
     }
 
     private static final String nameOf(String key) {

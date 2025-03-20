@@ -107,14 +107,14 @@ public class Cfg {
     // higher values result in faster movement/more force
     DUMP_U_VOLT = ConfigurationBase.getOr("pidf.dump-u-volt", 2),   // going up
     DUMP_H_VOLT = ConfigurationBase.getOr("pidf.dump-h-volt", 0.3), // staying/holding up
-    DUMP_D_VOLT = ConfigurationBase.getOr("pidf.dump-d-volt", -1.5),         // going back down
+    DUMP_D_VOLT = ConfigurationBase.getOr("pidf.dump-d-volt", -2.5),         // going back down
 
-    // timings for the ends of the 3 phases of dumping a coral, in 20ms intervals (ex. value of 10 == 200ms == 0.2ses)
-    // values are relative to when the trigger is pulled, not when the previous phase ends
-    // ex. H ("hold"/"stay up") phase begins 0.8sec after the trigger is pulled and ends 1sec later
+    // timings for the lengths of the 3 phases of dumping a coral, in 20ms intervals (ex. value of 10 == 200ms == 0.2ses)
     DUMP_U_TIME = ConfigurationBase.getOr("pidf.dump-u-time", 40),
-    DUMP_H_TIME = ConfigurationBase.getOr("pidf.dump-h-time", 90),
-    DUMP_D_TIME = ConfigurationBase.getOr("pidf.dump-d-time", 110),
+    DUMP_H_TIME = ConfigurationBase.getOr("pidf.dump-h-time", 40),
+    DUMP_D_TIME = ConfigurationBase.getOr("pidf.dump-d-time", 30),
+
+    WHEEL_VOLT = ConfigurationBase.getOr("pidf.wheel-volt", 5),
 
     // FeedForward gains for the (currently nonexistant) climber
     // currently unused
@@ -132,8 +132,8 @@ public class Cfg {
     // targets for moving parts (target.*)
     public final double // ...
 
-    TARGET_L4 = ConfigurationBase.getOr("target.l-L4", 1.1), // L4 pole
-    TARGET_L3 = ConfigurationBase.getOr("target.l-L3", 0.7), // L3 pole
-    TARGET_L2 = ConfigurationBase.getOr("target.l-L2", 0.1), // L2 pole
+    TARGET_L4 = ConfigurationBase.getOr("target.l-L4", 1.15), // L4 pole
+    TARGET_L3 = ConfigurationBase.getOr("target.l-L3", 0.72), // L3 pole
+    TARGET_L2 = ConfigurationBase.getOr("target.l-L2", 0.3), // L2 pole
     TARGET_CH = ConfigurationBase.getOr("target.l-CH", 0.1); // chute/human player station
 }

@@ -4,7 +4,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.config.Cfg;
@@ -34,9 +33,6 @@ public class ElevtSubSystem extends SubsystemBase {
         this.ff = this.loadedFF;
 
         this.setDefaultCommand(this.run(this::hold));
-
-        Shuffleboard.getTab("target").addDouble("elev-pos", this::getPos);
-        Shuffleboard.getTab("target").addDouble("elev-vel", this::getVel);
     }
 
     public void setLoaded(boolean x) {
@@ -71,9 +67,8 @@ public class ElevtSubSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("elev pos (m)", this.getPos());
+        SmartDashboard.putNumber("elev pos (m)"  , this.getPos());
         SmartDashboard.putNumber("elev vel (m/s)", this.getVel());
-        SmartDashboard.putNumber("elev vel (RPM)", this.getVel());
     }
 
     private void cfgFF() {
@@ -98,6 +93,6 @@ public class ElevtSubSystem extends SubsystemBase {
     }
 
     public double getVel() {
-        return this.encoder.getVelocity() * (1 / 60) * (1 / 20) * (0.0444 / 2); // RPM:RPS -> 20:1 gearbox -> ~0.0444m sprocket
+        return this.encoder.getVelocity() * (1.0 / 60.0) * (0.0444 / 2.0) * 2.0; // RPM:RPS -> ~0.0444m sprocket * 2 stage elev
     }
 }
