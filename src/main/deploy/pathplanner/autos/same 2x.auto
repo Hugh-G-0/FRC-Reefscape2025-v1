@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "inner cage to L1 far"
+            "pathName": "same mid cage to L1 kinda far"
           }
         },
         {
@@ -19,7 +19,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "L1 far to far pickup"
+            "pathName": "same L1 KF to RL"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "same RL to L1 KN"
           }
         }
       ]

@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "alt mid cage to L1 kinda far"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "dump"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "alt L1 kinda far to pickup"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "alt RL to L1 KN"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

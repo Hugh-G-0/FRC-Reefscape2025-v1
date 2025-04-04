@@ -7,8 +7,11 @@ import com.gmail.frcteam1758.lib.swervedrive.control.SwerveDriveInput;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.config.Cfg;
 import frc.robot.coral.DumpSubSystem;
+import frc.robot.drive.AlignCommand;
+import frc.robot.drive.DriveSubSystem;
 import frc.robot.elevt.ElevCommand;
 import frc.robot.elevt.ElevtSubSystem;
 import frc.robot.elevt.HoldCommand;
@@ -45,6 +48,9 @@ public class JSMainControls {
         else if (lstick.getRawButtonPressed(2)) {
             new DumpSubSystem.ResetCommand().schedule();
         }
+        else if (lstick.getRawButtonPressed(4)) {
+            new DumpSubSystem.EjectAlgaeCommand().schedule();
+        }
 
         ElvPosition currentLPos = ElvPosition.ofPOV(rstick.getPOV());
 
@@ -59,6 +65,23 @@ public class JSMainControls {
         }
 
         prevLPos = currentLPos;
+
+        if (rstick.getRawButtonPressed(3)) {
+            DumpSubSystem.INSTANCE.servo.set(0.0);
+            System.out.println("servo3");
+            
+        }
+        else if (rstick.getRawButtonPressed(5)) {
+            DumpSubSystem.INSTANCE.servo.set(0.6);
+            System.out.println("servo4");
+        }
+
+        if (rstick.getRawButtonPressed(4)) {
+            CommandScheduler.getInstance().getDefaultCommand(DriveSubSystem.INSTANCE).schedule();
+        }
+        else if (rstick.getRawButtonPressed(6)) {
+            new AlignCommand().schedule();
+        }
     }
 
     private static enum ElvPosition {

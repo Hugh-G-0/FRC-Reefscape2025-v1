@@ -114,7 +114,7 @@ public class Cfg {
     DUMP_H_TIME = ConfigurationBase.getOr("pidf.dump-h-time", 40),
     DUMP_D_TIME = ConfigurationBase.getOr("pidf.dump-d-time", 30),
 
-    WHEEL_VOLT = ConfigurationBase.getOr("pidf.wheel-volt", 5),
+    WHEEL_VOLT = ConfigurationBase.getOr("pidf.wheel-volt", 3),
 
     // FeedForward gains for the (currently nonexistant) climber
     // currently unused
@@ -135,5 +135,7 @@ public class Cfg {
     TARGET_L4 = ConfigurationBase.getOr("target.l-L4", 1.15), // L4 pole
     TARGET_L3 = ConfigurationBase.getOr("target.l-L3", 0.72), // L3 pole
     TARGET_L2 = ConfigurationBase.getOr("target.l-L2", 0.3), // L2 pole
-    TARGET_CH = ConfigurationBase.getOr("target.l-CH", 0.1); // chute/human player station
+    TARGET_CH = ConfigurationBase.getOr("target.l-CH", 0.1), // chute/human player station
+
+    LASER_DIST = ConfigurationBase.getOr("target.laser-dist", 500);
 }

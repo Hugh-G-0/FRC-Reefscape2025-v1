@@ -26,6 +26,8 @@ public class ElevtSubSystem extends SubsystemBase {
         
         this.liftMtr = new SparkMax(21, MotorType.kBrushless);
 
+        this.liftMtr.setInverted(false);
+
         this.encoder = this.liftMtr.getEncoder();
 
         this.cfgFF();
@@ -42,7 +44,7 @@ public class ElevtSubSystem extends SubsystemBase {
     public void approach(double target) {
 
         double voltage = this.ff.calculate(
-            0.5 * Math.signum(target - this.getPos())
+            0.55 * Math.signum(target - this.getPos())
         );
 
         if (Math.abs(target - this.getPos()) < 0.1) {
