@@ -122,6 +122,15 @@ public class Robot extends TimedRobot {
                     DriveSubSystem.INSTANCE
                 )
             ),
+            //changed to fix auto
+            new RunOnceCommand(
+                () -> DriveSubSystem.INSTANCE.chassis.run(
+                    new SwerveDriveState(
+                        new ChassisSpeeds(0, 0, 0)
+                    )
+                ),
+                DriveSubSystem.INSTANCE
+            ),
             new DumpSubSystem.DumpCommand(50)
         );
 
